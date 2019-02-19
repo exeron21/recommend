@@ -25,26 +25,26 @@ def item_sim(d):
     # 计算最终相似度矩阵
     W = dict()
     for i, related_items in C.items():
-        if W.get(i,-1)==-1:
+        if W.get(i, -1) == -1:
             W[i] = dict()
         for j, cij in related_items.items():
-            if W[i].get(j,-1)==-1:
+            if W[i].get(j, -1) == -1:
                 W[i][j] = 0
             W[i][j] += 2 * cij / ((N[i] + N[j]) * 1.0)
     return W
 
 
-def recommendation(d, user_id, C, k):
+def recommendation(d, user_id, c, k):
     rank = dict()
-    Ru = d[user_id]
+    ru = d[user_id]
     # print('196用户打分过的物品：',Ru)
-    for i, rating in Ru.items():
+    for i, rating in ru.items():
         # print(i,'相似的物品集合top10：',sorted(C[i].items(),key=lambda x:x[1],reverse=True)[0:10])
         # break
-        for j, sim in sorted(C[i].items(),
+        for j, sim in sorted(c[i].items(),
                              key=operator.itemgetter(1), reverse=True)[0:k]:
             # 过滤这个user已经打分过的item
-            if j in Ru:
+            if j in ru:
                 continue
             elif rank.get(j, -1) == -1:
                 rank[j] = 0

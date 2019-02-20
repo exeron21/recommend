@@ -9,7 +9,7 @@ cross_file = conf.cross_file
 user_feat_map_file = conf.user_feat_map_file
 model_file = conf.model_file
 
-data = gcd.user_music_score(10000)
+data = gcd.user_music_score(400000) # 这里最底层读的是user_watch_pref.sml文件，一共只有321039条记录
 # 定义 label 0/1规则：听完就算喜欢
 data['label'] = data['score'].apply(lambda x: 1 if x >= 1.0 else 0)
 
@@ -24,7 +24,7 @@ user_profile = conf.gen_user_profile()
 music_meta = conf.gen_music_meta()
 # 关联用户和item的信息到data中
 data = data.merge(user_profile, how='inner', on='user_id').merge(music_meta, how='inner', on='music_id')
-print('data merge: ', data[['user_id', 'music_id', 'score', 'label']].head())
+print('data merge:\n ', data[['user_id', 'music_id', 'score', 'label']].head())
 
 '''
 特征种类

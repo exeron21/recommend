@@ -55,7 +55,7 @@ def train_from_df(df, col_name=['user_id', 'music_id', 'score']):
 
 # 主函数
 if __name__ == '__main__':
-    data = user_music_score()
+    data = user_music_score(50000)
     print(data.size)
     train = train_from_df(data)
     # 将训练数据存起来，下次使用时直接用即可

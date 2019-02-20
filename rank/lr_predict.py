@@ -3,7 +3,7 @@ import recall.config as conf
 # 获取用户特征
 user_feat_map_file = conf.user_feat_map_file
 
-user_id ='10101010101'
+user_id ='000492e115177a08689d49b2ecf005e3'
 with open(user_feat_map_file, 'r', encoding='utf-8') as f:
     user_feat_map = eval(f.read())
 # print(user_feat_map)

@@ -13,7 +13,7 @@ train = {}
 with open(conf.cf_train_data_path, 'r', encoding='utf-8') as f:
     train = eval(f.read())
 print('CF train data have loaded! Start compute user similarity ...')
-print(train)
+# print(train)
 
 reclst = dict()
 

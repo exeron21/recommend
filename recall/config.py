@@ -20,7 +20,7 @@ cf_train_data_path = '../data/cf_train.data'
 sim_mid_data_path = '../data/sim_m_data'
 user_user_sim_file = os.path.join(sim_mid_data_path, 'user_sim.data')
 item_item_sim_file = os.path.join(sim_mid_data_path, 'item_sim.data')
-user_feat_map_file = '../data/map/user_feat_map'
+user_feat_map_file = '../data/map/user_feat_map'  # 用户特征列表：{'gender_女': 0, 'gender_男': 1, ...}
 cf_rec_lst_outfile = '../data/cf_reclst.data'
 model_file = '../data/map/model_file'
 

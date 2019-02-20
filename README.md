@@ -5,9 +5,9 @@
     - `notebook`: 主要是原始数据进行分析，对数据进行处理
 - 数据模块
     - `raw_data`: 音乐数据原始数据存放目录
-        - `music_meta` 759984条记录。字段说明：音乐id，简单描述信息desc，音乐时长total_timelen，location，音乐标签tags
-        - `user_profile.data` 100000条记录。字段说明： 用户id,性别gender，年龄段age，salary薪资，地区省份
-        - `user_watch_pref.xml` 321039条记录。字段说明： 用户id，音乐id，收听时长（单位秒），收听时间点（hour）
+        - `music_meta` 音乐数据759984条记录。字段说明：音乐id，简单描述信息desc，音乐时长total_timelen，location，音乐标签tags
+        - `user_profile.data` 用户数据100000条记录。字段说明： 用户id,性别gender，年龄段age，salary薪资，地区省份
+        - `user_watch_pref.xml` 用户行为数据321039条记录。字段说明： 用户id，音乐id，收听时长（单位秒），收听时间点（hour）
 
 - **代码模块**
     - `recall`: 召回模块主要用的协同过滤做召回

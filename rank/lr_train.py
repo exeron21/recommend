@@ -58,11 +58,11 @@ with open(cross_file, 'w') as cf:
     cf.write(str(cross_feat_map))
 
 # train test split[0.7, 0.3] 随机划分数据集,0.7作为训练，0.3作为预测
-x_train, x_test, y_train, y_test = train_test_split(df.values, labels, test_size=0.3, random_state=2019)
-lr = LogisticRegression(penalty='l2', dual=False, tol=1e-4, C=1.0,
+x_train, x_test, y_train, y_test = train_test_split(df.values, labels, test_size=0.2, random_state=2019)
+lr = LogisticRegression(penalty='l2', dual=False, tol=1e-4, C=0.1,
                         fit_intercept=True, intercept_scaling=1, class_weight=None,
                         random_state=None, solver='liblinear', max_iter=100,
-                        multi_class='ovr', verbose=0, warm_start=False, n_jobs=1)
+                        multi_class='ovr', verbose=0, warm_start=False, n_jobs=-1)
 model = lr.fit(x_train, y_train)
 print("w:%s,b:%s" % (lr.coef_, lr.intercept_))
 print("Residual sum of squares: %.2f" % np.mean((lr.predict(x_test) - y_test) ** 2))

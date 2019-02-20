@@ -2,7 +2,16 @@ import recall.config as conf
 import math
 
 a = conf.a
-user_id = '014c8e555aa35acfb6b7008a01e085f2'
+# user_id = '014c8e555aa35acfb6b7008a01e085f2'
+user_id = '018de1e53b639c0b45fcb7362b01c027'
+
+# 以前听什么歌
+user_watch = conf.gen_user_watch()
+music_df = conf.gen_music_meta()
+df = user_watch.merge(music_df, how='inner', on='music_id')
+del user_watch
+df = df.loc[df['user_id'] == user_id, ['music_name']]
+print(df.head(100))
 # step1: 载入特征处理
 # load user and item category feature
 with open(conf.user_feat_map_file, 'r', encoding='utf-8') as f:
@@ -63,13 +72,13 @@ del user_df
 
 rec_lst = []
 for music_id in rec_item_all.keys():
-    item_df = conf.gen_music_meta()
-    location, item_name = '', ''
-    for _, row in item_df.loc[item_df['music_id'] == int(music_id), :].iterrows():
-        print(row)
-        location, item_name = row['music_loc'], row['music_name']
-        print('%s, %s' % (location, item_name))
-    location_idx = category_feat_dict['music_loc_' + location]
+    # item_df = conf.gen_music_meta()
+    music_loc, item_name = '', ''
+    for _, row in music_df.loc[music_df['music_id'] == int(music_id), :].iterrows():
+        # print(row)
+        music_loc, item_name = row['music_loc'], row['music_name']
+        # print('music_loc: %s,music_name: %s' % (music_loc, item_name))
+    location_idx = category_feat_dict['music_loc_' + music_loc]
 
     ui_key = user_id + '_' + music_id
     cross_value = float(cross_feat_dict.get(ui_key, 0))
@@ -81,7 +90,8 @@ for music_id in rec_item_all.keys():
     wx_score += w[-1] * cross_value
     # sigmoid:p(y=1|x)=(1+exp(-wx)
     final_rec_score = 1/(1 + math.exp(-wx_score))
-    # score = rec_item_all[music_id]
+    score = rec_item_all[music_id]
+    final_rec_score = 0.3 * final_rec_score + 0.7 * score
 
     rec_lst.append((music_id, item_name, final_rec_score))
 
